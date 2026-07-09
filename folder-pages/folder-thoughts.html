@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一些浅度思考 - 徐思思</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-deep: #2D1540; --purple-rich: #4A1D6E; --purple-mid: #6B3A9E;
+            --purple-soft: #9B6DC6; --cream: #FDF8F0; --gold-accent: #C4A265;
+            --font-display: 'Playfair Display','Noto Serif SC',serif;
+            --font-body: 'Noto Sans SC',sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:var(--font-body); background:linear-gradient(170deg,#1a0d2e 0%,#2D1540 40%,#4A1D6E 100%); color:#fff; min-height:100vh; }
+
+        /* Top bar */
+        .top-bar { padding:20px 32px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10; background:rgba(26,13,46,0.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.05); }
+        .page-title { font-family:var(--font-display); font-size:22px; font-weight:600; color:rgba(255,255,255,0.85); }
+        .page-sub { font-size:10px; color:rgba(255,255,255,0.3); letter-spacing:3px; text-transform:uppercase; margin-top:2px; }
+        .back-btn { padding:8px 18px; border:1px solid rgba(255,255,255,0.15); border-radius:20px; background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.6); font-size:12px; text-decoration:none; transition:all 0.3s; }
+        .back-btn:hover { background:rgba(255,255,255,0.12); border-color:var(--gold-accent); color:var(--gold-accent); }
+
+        /* Tab navigation */
+        .tab-nav { display:flex; gap:0; padding:0 32px; position:sticky; top:62px; z-index:9; background:rgba(26,13,46,0.75); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,0.06); }
+        .tab-btn { flex:1; padding:14px 16px; text-align:center; font-size:13px; color:rgba(255,255,255,0.4); border:none; background:transparent; cursor:pointer; transition:all 0.35s; position:relative; letter-spacing:1px; }
+        .tab-btn::after { content:''; position:absolute; bottom:0; left:50%; width:0; height:2px; background:var(--gold-accent); transition:all 0.35s; transform:translateX(-50%); }
+        .tab-btn.active { color:#fff; font-weight:500; }
+        .tab-btn.active::after { width:40px; }
+        .tab-btn:hover { color:rgba(255,255,255,0.7); }
+
+        /* PDF container */
+        .pdf-section { display:none; padding:24px 32px 60px; }
+        .pdf-section.active { display:block; }
+        .pdf-header { margin-bottom:20px; }
+        .pdf-header h2 { font-family:var(--font-display); font-size:24px; color:rgba(255,255,255,0.9); margin-bottom:6px; }
+        .pdf-header .pdf-tag { display:inline-block; padding:3px 10px; background:rgba(196,162,101,0.12); color:var(--gold-accent); font-size:10px; border-radius:10px; letter-spacing:1px; }
+        .pdf-download { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:9px 22px; background:rgba(196,162,101,0.15); border:1px solid rgba(196,162,101,0.25); border-radius:20px; color:var(--gold-accent); font-size:12px; text-decoration:none; transition:all 0.3s; }
+        .pdf-download:hover { background:rgba(196,162,101,0.25); transform:translateY(-1px); }
+        .pdf-download svg { width:14px; height:14px; stroke:var(--gold-accent); }
+
+        /* PDF viewer iframe */
+        .pdf-viewer { width:100%; height:75vh; border:1px solid rgba(255,255,255,0.08); border-radius:12px; background:rgba(255,255,255,0.03); overflow:hidden; }
+        .pdf-viewer iframe { width:100%; height:100%; border:none; border-radius:12px; }
+
+        /* Fallback for mobile */
+        .pdf-fallback { display:none; padding:24px; border-radius:12px; background:rgba(74,29,110,0.2); border:1px solid rgba(255,255,255,0.06); text-align:center; margin-top:16px; }
+        .pdf-fallback p { font-size:13px; color:rgba(255,255,255,0.5); line-height:1.6; margin-bottom:14px; }
+        .pdf-fallback .pdf-download { margin-top:0; }
+
+        .divider { width:30px; height:1.5px; background:var(--gold-accent); margin:36px auto; opacity:0.4; }
+
+        @media (max-width:768px) {
+            .tab-nav { padding:0 16px; }
+            .tab-btn { font-size:12px; padding:12px 10px; }
+            .pdf-section { padding:16px 16px 40px; }
+            .pdf-viewer { height:55vh; }
+            .pdf-fallback { display:block; }
+            .pdf-viewer iframe { display:none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div>
+            <h1 class="page-title">一些浅度思考</h1>
+            <p class="page-sub">Shallow Thoughts</p>
+        </div>
+        <a href="./index.html" class="back-btn">&larr; 返回</a>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab(0)">关于AIGC</button>
+        <button class="tab-btn" onclick="switchTab(1)">关于银发网红</button>
+        <button class="tab-btn" onclick="switchTab(2)">关于红色文化</button>
+    </div>
+
+    <!-- PDF 1: AIGC -->
+    <div class="pdf-section active" id="pdf0">
+        <div class="pdf-header">
+            <h2>关于AIGC</h2>
+            <span class="pdf-tag">THINKING</span>
+        </div>
+        <div class="pdf-viewer">
+            <iframe src="../aigc.pdf" title="关于AIGC"></iframe>
+        </div>
+        <div class="pdf-fallback">
+            <p>当前设备暂不支持在线预览PDF，请点击下方按钮下载查看</p>
+            <a href="../aigc.pdf" download="关于AIGC.pdf" class="pdf-download">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                下载PDF
+            </a>
+        </div>
+        <a href="../aigc.pdf" download="关于AIGC.pdf" class="pdf-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            下载PDF
+        </a>
+    </div>
+
+    <!-- PDF 2: 银发网红 -->
+    <div class="pdf-section" id="pdf1">
+        <div class="pdf-header">
+            <h2>关于银发网红</h2>
+            <span class="pdf-tag">THINKING</span>
+        </div>
+        <div class="pdf-viewer">
+            <iframe src="../silver-influencer.pdf" title="关于银发网红"></iframe>
+        </div>
+        <div class="pdf-fallback">
+            <p>当前设备暂不支持在线预览PDF，请点击下方按钮下载查看</p>
+            <a href="../silver-influencer.pdf" download="关于银发网红.pdf" class="pdf-download">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                下载PDF
+            </a>
+        </div>
+        <a href="../silver-influencer.pdf" download="关于银发网红.pdf" class="pdf-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            下载PDF
+        </a>
+    </div>
+
+    <!-- PDF 3: 红色文化 -->
+    <div class="pdf-section" id="pdf2">
+        <div class="pdf-header">
+            <h2>关于红色文化</h2>
+            <span class="pdf-tag">THINKING</span>
+        </div>
+        <div class="pdf-viewer">
+            <iframe src="../red-culture.pdf" title="关于红色文化"></iframe>
+        </div>
+        <div class="pdf-fallback">
+            <p>当前设备暂不支持在线预览PDF，请点击下方按钮下载查看</p>
+            <a href="../red-culture.pdf" download="关于红色文化.pdf" class="pdf-download">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                下载PDF
+            </a>
+        </div>
+        <a href="../red-culture.pdf" download="关于红色文化.pdf" class="pdf-download">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+            下载PDF
+        </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <script>
+        function switchTab(idx) {
+            document.querySelectorAll('.tab-btn').forEach((b, i) => {
+                b.classList.toggle('active', i === idx);
+            });
+            document.querySelectorAll('.pdf-section').forEach((s, i) => {
+                s.classList.toggle('active', i === idx);
+            });
+        }
+    </script>
+</body>
+</html>

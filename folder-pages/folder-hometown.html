@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的家乡 - 徐思思</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-deep: #2D1540; --purple-rich: #4A1D6E; --purple-mid: #6B3A9E;
+            --purple-soft: #9B6DC6; --cream: #FDF8F0; --gold-accent: #C4A265;
+            --font-display: 'Playfair Display','Noto Serif SC',serif;
+            --font-body: 'Noto Sans SC',sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:var(--font-body); color:#fff; min-height:100vh; position:relative; }
+        .bg-img { position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:brightness(0.35) saturate(0.7); }
+        .overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(180deg,rgba(26,13,46,0.6) 0%,rgba(45,21,64,0.75) 50%,rgba(26,13,46,0.9) 100%); z-index:1; }
+        .top-bar { position:relative; z-index:2; padding:20px 32px; display:flex; justify-content:space-between; align-items:center; }
+        .back-btn { padding:8px 18px; border:1px solid rgba(255,255,255,0.15); border-radius:20px; background:rgba(255,255,255,0.05); color:rgba(255,255,255,0.6); font-size:12px; text-decoration:none; transition:all 0.3s; }
+        .back-btn:hover { background:rgba(255,255,255,0.12); border-color:var(--gold-accent); color:var(--gold-accent); }
+        .content { position:relative; z-index:2; max-width:680px; margin:0 auto; padding:20px 32px 80px; }
+        .section-title { font-family:var(--font-display); font-size:28px; font-weight:600; color:rgba(255,255,255,0.9); margin-bottom:6px; }
+        .section-sub { font-size:11px; color:rgba(255,255,255,0.35); letter-spacing:3px; text-transform:uppercase; margin-bottom:36px; }
+        .text-block { font-size:15px; color:rgba(255,255,255,0.75); line-height:2.1; margin-bottom:14px; text-indent:2em; }
+        .text-block:last-of-type { text-indent:0; text-align:center; font-family:var(--font-display); font-size:17px; color:var(--gold-accent); margin-top:32px; letter-spacing:2px; }
+        .divider { width:30px; height:1.5px; background:var(--gold-accent); margin:32px auto; }
+    </style>
+</head>
+<body>
+    <img src="./images/hometown-bg.jpg" alt="我的家乡" class="bg-img">
+    <div class="overlay"></div>
+    <div class="top-bar">
+        <div>
+            <h1 class="section-title">我的家乡</h1>
+            <p class="section-sub">Hometown · Taojiang, Yiyang</p>
+        </div>
+        <a href="./index.html" class="back-btn">&larr; 返回</a>
+    </div>
+    <div class="content">
+        <div class="text-block">我来自湖南益阳桃江，一个被竹海泡软了的地方。</div>
+        <div class="text-block">小时候推开窗就是山，山上全是楠竹，风一过，整座山都在点头。桃江被称作"楠竹之乡"，不是嘴上说说，是真的——竹子长进了骨头里，竹编的篮、带笋的饭、竹林里跑大的小孩，连空气都是翠绿的，带一点刚下过雨的甜腥味。</div>
+        <div class="text-block">益阳人不喝茶是不行的。隔壁安化出黑茶，那股香沉得很，喝一口像是把时间咽下去了。但在桃江，我们更日常的是擂茶——花生芝麻茶叶搁进石钵，一根擂棒磨到底，冲上水、撒上炒米，满屋子都是香的。擂茶馆是我们独有的，擂茶配几碟小菜，一下午就这么过去了，谁也不急着走。</div>
+        <div class="text-block">你可能不知道，益阳还是"羽毛球之乡"。这说法听着体面，但对我们来说更朴素：球拍是书包里永远塞着的东西，放学就去球馆，周末就打比赛，街坊邻居聊的不是谁家孩子考了多少分，是谁家娃又拿了省赛名次。羽毛球在这不是运动，是呼吸方式。</div>
+        <div class="text-block">益阳围炉麻辣烫是另一回事。无论寒冬酷暑，一锅红油，串串往里涮，围坐着边吃边聊，雾气糊了眼镜也懒得擦。那种热不是辣的热，是人挤在一起的热，要是配上一杯擂茶别提多有滋味。</div>
+        <div class="text-block">春天的时候，油菜花黄得不像话，稻田绿得发亮，炊烟从瓦顶上冒，我会跟在外婆的屁股后头上山踩野果摘野菜，到了夏季，小溪在家门前从石桥底下过，和发小们书包一丢就爱扎进水里摸鱼捉虾，一点也不觉得晒。你说这地方有什么了不起的？没有。但它就是你走着走着会想回来的地方。</div>
+        <div class="text-block">我叫它，家。</div>
+        <div class="divider"></div>
+    </div>
+</body>
+</html>
